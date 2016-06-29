@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 引用db.properties配置文件 -->
+	<properties resource="mybatis/jdbc.properties" />
+
+	<typeAliases>
+		<typeAlias alias="GaugeProduct" type="com.iidooo.gauge.model.po.GaugeProduct" />
+		<typeAlias alias="GaugeItem" type="com.iidooo.gauge.model.po.GaugeItem" />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${mysql.driverClassName}" />
+				<property name="url" value="${mysql.url}" />
+				<property name="username" value="${mysql.username}" />
+				<property name="password" value="${mysql.password}" />
+				<property name="poolMaximumActiveConnections" value="50" />
+                <property name="poolMaximumIdleConnections" value="50" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="com/iidooo/gauge/mapper/GaugeProductMapper.xml" />
+		<mapper resource="com/iidooo/gauge/mapper/GaugeItemMapper.xml" />
+	</mappers>
+</configuration>

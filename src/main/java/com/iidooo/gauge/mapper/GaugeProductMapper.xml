@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iidooo.gauge.mapper.GaugeProductMapper" >
+  <resultMap id="BaseResultMap" type="com.iidooo.gauge.model.po.GaugeProduct" >
+    <id column="ProductID" property="productID" jdbcType="INTEGER" />
+    <result column="ProductCode" property="productCode" jdbcType="VARCHAR" />
+    <result column="VehicleLicense" property="vehicleLicense" jdbcType="VARCHAR" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserID" property="updateUserID" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CreateUserID" property="createUserID" jdbcType="INTEGER" />
+    <result column="IsDelete" property="isDelete" jdbcType="INTEGER" />
+    <result column="Version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    P.ProductID, P.ProductCode, P.VehicleLicense, P.Remarks, P.UpdateTime, P.UpdateUserID, P.CreateTime, 
+    P.CreateUserID, P.IsDelete, P.Version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gauge_product
+    where ProductID = #{productID,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByProductCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  	select 
+    <include refid="Base_Column_List" />
+    from gauge_product P
+    where P.IsDelete = 0 and P.ProductCode = #{productCode,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gauge_product
+    where ProductID = #{productID,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- 插入一个新的GaugeProduct -->
+  <insert id="insert" useGeneratedKeys="true" keyProperty="productID"  parameterType="com.iidooo.gauge.model.po.GaugeProduct" >
+    insert into gauge_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productID != null" >
+        ProductID,
+      </if>
+      <if test="productCode != null" >
+        ProductCode,
+      </if>
+      <if test="vehicleLicense != null" >
+        VehicleLicense,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+      <if test="updateTime != null" >
+        UpdateTime,
+      </if>
+      <if test="updateUserID != null" >
+        UpdateUserID,
+      </if>
+      <if test="createTime != null" >
+        CreateTime,
+      </if>
+      <if test="createUserID != null" >
+        CreateUserID,
+      </if>
+      <if test="isDelete != null" >
+        IsDelete,
+      </if>
+      <if test="version != null" >
+        Version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productID != null" >
+        #{productID,jdbcType=INTEGER},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleLicense != null" >
+        #{vehicleLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserID != null" >
+        #{updateUserID,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserID != null" >
+        #{createUserID,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.gauge.model.po.GaugeProduct" >
+    update gauge_product
+    <set >
+      <if test="productCode != null" >
+        ProductCode = #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleLicense != null" >
+        VehicleLicense = #{vehicleLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserID != null" >
+        UpdateUserID = #{updateUserID,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserID != null" >
+        CreateUserID = #{createUserID,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        IsDelete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        Version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ProductID = #{productID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iidooo.gauge.model.po.GaugeProduct" >
+    update gauge_product
+    set ProductCode = #{productCode,jdbcType=VARCHAR},
+      VehicleLicense = #{vehicleLicense,jdbcType=VARCHAR},
+      Remarks = #{remarks,jdbcType=VARCHAR},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      UpdateUserID = #{updateUserID,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      CreateUserID = #{createUserID,jdbcType=INTEGER},
+      IsDelete = #{isDelete,jdbcType=INTEGER},
+      Version = #{version,jdbcType=INTEGER}
+    where ProductID = #{productID,jdbcType=INTEGER}
+  </update>
+</mapper>
