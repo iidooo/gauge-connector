@@ -27,6 +27,8 @@ public class GaugeDataServiceImpl implements GaugeDataService {
             GaugeProduct gaugeProduct = gaugeProductMapper.selectByProductCode(productCode);
             if (gaugeProduct == null) {
                 gaugeProduct = new GaugeProduct();
+                gaugeProduct.setVehicleID(0);
+                gaugeProduct.setDriverID(0);
                 gaugeProduct.setProductCode(productCode);
                 gaugeProduct.setCreateTime(new Date());
                 gaugeProduct.setCreateUserID(1);

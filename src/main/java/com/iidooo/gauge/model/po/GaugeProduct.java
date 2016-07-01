@@ -5,9 +5,13 @@ import java.util.Date;
 public class GaugeProduct {
     private Integer productID;
 
+    private Integer vehicleID;
+
+    private Integer driverID;
+
     private String productCode;
 
-    private String vehicleLicense;
+    private String city;
 
     private String remarks;
 
@@ -23,12 +27,31 @@ public class GaugeProduct {
 
     private Integer version;
 
+    public GaugeProduct() {
+    }
+
     public Integer getProductID() {
         return productID;
     }
 
     public void setProductID(Integer productID) {
         this.productID = productID;
+    }
+
+    public Integer getVehicleID() {
+        return vehicleID;
+    }
+
+    public void setVehicleID(Integer vehicleID) {
+        this.vehicleID = vehicleID;
+    }
+
+    public Integer getDriverID() {
+        return driverID;
+    }
+
+    public void setDriverID(Integer driverID) {
+        this.driverID = driverID;
     }
 
     public String getProductCode() {
@@ -39,12 +62,12 @@ public class GaugeProduct {
         this.productCode = productCode == null ? null : productCode.trim();
     }
 
-    public String getVehicleLicense() {
-        return vehicleLicense;
+    public String getCity() {
+        return city;
     }
 
-    public void setVehicleLicense(String vehicleLicense) {
-        this.vehicleLicense = vehicleLicense == null ? null : vehicleLicense.trim();
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
     public String getRemarks() {
