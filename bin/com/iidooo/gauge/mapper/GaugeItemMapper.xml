@@ -7,6 +7,7 @@
     <result column="Temperature" property="temperature" jdbcType="REAL" />
     <result column="Pressure" property="pressure" jdbcType="REAL" />
     <result column="Particulate" property="particulate" jdbcType="REAL" />
+    <result column="ErrorCode" property="remarks" jdbcType="VARCHAR" />
     <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
     <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="UpdateUserID" property="updateUserID" jdbcType="INTEGER" />
@@ -16,7 +17,7 @@
     <result column="Version" property="version" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ItemID, ProductID, Temperature, Pressure, Particulate, Remarks, UpdateTime, UpdateUserID, 
+    ItemID, ProductID, Temperature, Pressure, Particulate, ErrorCode, Remarks, UpdateTime, UpdateUserID, 
     CreateTime, CreateUserID, IsDelete, Version
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -46,11 +47,11 @@
       <if test="particulate != null" >
         Particulate,
       </if>
+      <if test="errorCode != null" >
+        ErrorCode,
+      </if>
       <if test="remarks != null" >
         Remarks,
-      </if>
-      <if test="updateTime != null" >
-        UpdateTime,
       </if>
       <if test="updateUserID != null" >
         UpdateUserID,
@@ -61,8 +62,6 @@
       <if test="createUserID != null" >
         CreateUserID,
       </if>
-        IsDelete,
-        Version,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="productID != null" >
@@ -77,11 +76,11 @@
       <if test="particulate != null" >
         #{particulate,jdbcType=REAL},
       </if>
+      <if test="errorCode != null" >
+        #{errorCode,jdbcType=VARCHAR},
+      </if>
       <if test="remarks != null" >
         #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUserID != null" >
         #{updateUserID,jdbcType=INTEGER},
@@ -91,9 +90,10 @@
       </if>
       <if test="createUserID != null" >
         #{createUserID,jdbcType=INTEGER},
-      </if>0,1
+      </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.iidooo.gauge.model.po.GaugeItem" >
     update gauge_item
     <set >
@@ -108,6 +108,9 @@
       </if>
       <if test="particulate != null" >
         Particulate = #{particulate,jdbcType=REAL},
+      </if>
+      <if test="errorCode != null" >
+        ErrorCode = #{errorCode,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null" >
         Remarks = #{remarks,jdbcType=VARCHAR},
@@ -131,21 +134,6 @@
         Version = #{version,jdbcType=INTEGER},
       </if>
     </set>
-    where ItemID = #{itemID,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.iidooo.gauge.model.po.GaugeItem" >
-    update gauge_item
-    set ProductID = #{productID,jdbcType=INTEGER},
-      Temperature = #{temperature,jdbcType=REAL},
-      Pressure = #{pressure,jdbcType=REAL},
-      Particulate = #{particulate,jdbcType=REAL},
-      Remarks = #{remarks,jdbcType=VARCHAR},
-      UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
-      UpdateUserID = #{updateUserID,jdbcType=INTEGER},
-      CreateTime = #{createTime,jdbcType=TIMESTAMP},
-      CreateUserID = #{createUserID,jdbcType=INTEGER},
-      IsDelete = #{isDelete,jdbcType=INTEGER},
-      Version = #{version,jdbcType=INTEGER}
     where ItemID = #{itemID,jdbcType=INTEGER}
   </update>
 </mapper>

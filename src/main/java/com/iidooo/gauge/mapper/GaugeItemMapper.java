@@ -15,6 +15,4 @@ public interface GaugeItemMapper {
     GaugeItem selectByPrimaryKey(Integer itemID);
 
     int updateByPrimaryKeySelective(GaugeItem record);
-
-    int updateByPrimaryKey(GaugeItem record);
 }

@@ -12,6 +12,8 @@ public class GaugeItem {
     private Float pressure;
 
     private Float particulate;
+    
+    private String errorCode;
 
     private String remarks;
 
@@ -67,6 +69,14 @@ public class GaugeItem {
 
     public void setParticulate(Float particulate) {
         this.particulate = particulate;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
     public String getRemarks() {

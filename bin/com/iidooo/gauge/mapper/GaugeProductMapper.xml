@@ -5,6 +5,7 @@
     <id column="ProductID" jdbcType="INTEGER" property="productID" />
     <result column="VehicleID" jdbcType="INTEGER" property="vehicleID" />
     <result column="DriverID" jdbcType="INTEGER" property="driverID" />
+    <result column="ProductModel" jdbcType="VARCHAR" property="productModel" />
     <result column="ProductCode" jdbcType="VARCHAR" property="productCode" />
     <result column="City" jdbcType="VARCHAR" property="city" />
     <result column="Remarks" jdbcType="VARCHAR" property="remarks" />
@@ -16,7 +17,7 @@
     <result column="Version" jdbcType="INTEGER" property="version" />
   </resultMap>
   <sql id="Base_Column_List" >
-    P.ProductID, P.VehicleID, P.DriverID, P.ProductCode, P.City, P.Remarks, P.UpdateTime, P.UpdateUserID, 
+    P.ProductID, P.VehicleID, P.DriverID, P.ProductModel, P.ProductCode, P.City, P.Remarks, P.UpdateTime, P.UpdateUserID, 
     P.CreateTime, P.CreateUserID, P.IsDelete, P.Version
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -26,12 +27,13 @@
     where ProductID = #{productID,jdbcType=INTEGER}
   </select>
   
-  <!-- 通过产品编号查询 -->
-  <select id="selectByProductCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <!-- 通过产品型号编号查询 -->
+  <select id="selectByProductModelCode" resultMap="BaseResultMap" parameterType="com.iidooo.gauge.model.po.GaugeProduct" >
   	select 
     <include refid="Base_Column_List" />
     from gauge_product P
-    where P.IsDelete = 0 and P.ProductCode = #{productCode,jdbcType=VARCHAR}
+    where P.IsDelete = 0 and P.ProductModel = #{productModel,jdbcType=VARCHAR} and 
+    P.ProductCode = #{productCode,jdbcType=VARCHAR}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -48,6 +50,9 @@
       </if>
       <if test="driverID != null">
         DriverID,
+      </if>
+      <if test="productModel != null">
+        ProductModel,
       </if>
       <if test="productCode != null">
         ProductCode,
@@ -74,6 +79,9 @@
       </if>
       <if test="driverID != null">
         #{driverID,jdbcType=INTEGER},
+      </if>
+      <if test="productModel != null">
+        #{productModel,jdbcType=VARCHAR},
       </if>
       <if test="productCode != null">
         #{productCode,jdbcType=VARCHAR},

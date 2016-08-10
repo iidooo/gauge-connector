@@ -15,11 +15,11 @@ public interface GaugeProductMapper {
     GaugeProduct selectByPrimaryKey(Integer productID);
     
     /**
-     * 通过产品编号查询
-     * @param productCode 产品编号
+     * 通过产品型号，编号查询
+     * @param product 产品查询条件
      * @return 所获得的GaugeProduct对象
      */
-    GaugeProduct selectByProductCode(String productCode);
+    GaugeProduct selectByProductModelCode(GaugeProduct product);
 
     int updateByPrimaryKeySelective(GaugeProduct record);
 

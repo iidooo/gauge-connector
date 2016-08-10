@@ -26,11 +26,20 @@ public class GaugeDataController {
                 return false;
             }
             JSONObject jsonObject = JSONObject.fromObject(receivedData);
+            String productModel = "";
+            if(jsonObject.containsKey("model")){
+                productModel = jsonObject.getString("model");                
+            }
+            
             String productCode = jsonObject.getString("code");
             String temperature = jsonObject.getString("temp");
             String pressure = jsonObject.getString("press");
-
+            String errorCode = "";
+            if(jsonObject.containsKey("err")){
+                errorCode = jsonObject.getString("err");
+            }
             GaugeItem gaugeItem = new GaugeItem();
+            gaugeItem.getProduct().setProductModel(productModel);
             gaugeItem.getProduct().setProductCode(productCode);
             if (StringUtil.isNotBlank(temperature)) {
                 gaugeItem.setTemperature(Float.valueOf(temperature));
@@ -38,11 +47,13 @@ public class GaugeDataController {
             if (StringUtil.isNotBlank(pressure)) {
                 gaugeItem.setPressure(Float.valueOf(pressure));
             }
+            if(StringUtil.isNotBlank(errorCode)){
+                gaugeItem.setErrorCode(errorCode);
+            }
             
             gaugeDataService.receiveGuageData(gaugeItem);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             logger.fatal(e);
             return false;
         }

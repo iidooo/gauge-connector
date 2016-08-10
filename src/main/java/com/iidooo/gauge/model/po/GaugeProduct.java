@@ -8,6 +8,8 @@ public class GaugeProduct {
     private Integer vehicleID;
 
     private Integer driverID;
+    
+    private String productModel;
 
     private String productCode;
 
@@ -52,6 +54,14 @@ public class GaugeProduct {
 
     public void setDriverID(Integer driverID) {
         this.driverID = driverID;
+    }
+
+    public String getProductModel() {
+        return productModel;
+    }
+
+    public void setProductModel(String productModel) {
+        this.productModel = productModel;
     }
 
     public String getProductCode() {
